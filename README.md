@@ -26,7 +26,7 @@ https://6xfdrt.csb.app/
   <li>Homepage</li>
   <li>About</li>
   <li>Reservations</li>
-  <li>Menu - unfinished</li>
-  <li>Login - unfinished</li>
+  <li>Menu - /li>
+  <li>Login -</li>
 </ul>
 
