@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+  <article>
+    <h1>All Reservations</h1>
+    <!--Begin row-->
+    <div class="row">
+      <!--Begin col-->
+      <div class="column">
+        <pre id="bookings"></pre>
+      </div>
+      <!--End col-->
+
+      <!--Begin col-->
+      <div class="column">
+        <div class="videowrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11898.289517452584!2d-87.60853049433447!3d41.79442860243028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2912ce6f7027%3A0xc0cfb5545d4a37b2!2sHyde%20Park%2C%20Chicago%2C%20IL%2C%20USA!5e0!3m2!1sen!2spt!4v1662384760663!5m2!1sen!2spt"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <!--End col-->
+    </div>
+    <!--End row-->
+
+
+
+
+  </article>
+</section>
+<script>
+  const bookings = JSON.parse('{{ bookings|safe }}')
+  console.log(bookings);
+  const pretty_json = JSON.stringify(bookings,null,2)
+  document.getElementById('bookings').innerHTML = pretty_json
+</script>
+{% endblock %}
+
+
+
+Menu original
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Menu</h1>
+<!--Begin col-->
+<div class="column">
+    {% for item in menu.menu %}
+    <p>
+        <a href="{% url 'menu_item' pk=item.pk %}">
+            {{ item.name }}
+            </a>
+        <span class="menu-price">
+            ${{ item.price }}.00
+        </span>
+    </p>
+    {% endfor %}
+</div>
+<!--End col-->
+{% endblock %}
+
+
+menu item original
+
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+<section>
+   <article>
+      <h1>Menu item</h1>
+      <span>
+         <a href="{% url 'home' %}">Home</a> /
+         <a href="{% url 'menu' %}">Menu</a>/
+         {{menu_item.name}}
+      </span>
+      <!--Begin row-->
+      <div class="row">
+         <!--Begin col-->
+         <div class="column">
+            <h2>
+                {{ menu_item.name }}
+            </h2>
+            <p>
+                {{ menu_item.menu_item_description }}
+            </p>
+            <p>
+                Price: ${{ menu_item.price }}.00
+            </p>
+         </div>
+         <!--End col-->
+         <!--Begin col-->
+         <div class="column">
+            <img src="/Final Assessment/littlelemon/restaurant/static/img/{{menu_item.name}}.jpg" alt="{{ menu_item.name}}" />
+        </div>
+         <!--End col-->
+      </div>
+      <!--End row-->
+   </article>
+</section>
+{% endblock %}
+
+
+menu_item
+
+
+  <!-- Add a form to create a new menu item -->
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="title">Title:</label>
+    <input type="text" name="title" required>
+
+    <label for="price">Price:</label>
+    <input type="number" name="price" step="0.01" required>
+
+    <label for="featured">Featured:</label>
+    <input type="checkbox" name="featured">
+
+    <label for="category">Category:</label>
+    <select name="category">
+      {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.id }}</option>
+      {% endfor %}
+    </select>
+
+    <!-- New fields for image and menu item description -->
+    <label for="image">Image:</label>
+    <input type="file" name="image">
+
+    <label for="menu_item_description">Menu Item Description:</label>
+    <textarea name="menu_item_description" rows="4"></textarea>
+
+    <button type="submit">Add Menu Item</button>
+  </form>

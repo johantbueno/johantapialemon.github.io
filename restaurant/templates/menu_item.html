@@ -1,0 +1,54 @@
+<!-- templates/menu_items.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Menu Items</h1>
+ <!-- Add a form to create a new menu item -->
+ <div class="row">
+      <!--Begin col-->
+      <div class="column">
+ <form method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+   <label for="title">Title:</label>
+   <input type="text" name="title" required>
+
+   <label for="price">Price:</label>
+   <input type="number" name="price" step="0.01" required>
+
+   <label for="featured">Featured:</label>
+   <input type="checkbox" name="featured">
+
+   <label for="category">Category:</label>
+   <select name="category">
+     {% for category in categories %}
+       <option value="{{ category.id }}">{{ category.id }}</option>
+     {% endfor %}
+   </select>
+
+   <!-- New fields for image and menu item description -->
+   <label for="image">Image:</label>
+   <input type="file" name="image">
+
+   <label for="menu_item_description">Menu Item Description:</label>
+   <textarea name="menu_item_description" rows="4"></textarea>
+
+   <button type="submit" id="button">Add Menu Item</button>
+   
+ </form>
+</div>
+</div>
+
+  <!-- Display existing menu items -->
+  <h1>Menu Items</h1>
+
+  {% for menu_item in menu_items %}
+      <div>
+          <p>{{ menu_item.title }}</p>
+          <p>{{ menu_item.price }}</p>
+          <p>{{ menu_item.menu_item_description }}</p>
+          <!-- Add other fields as needed -->
+          <img src="{{ menu_item.image.url }}" alt="{{ menu_item.title }}">
+      </div>
+  {% endfor %}
+{% endblock %}

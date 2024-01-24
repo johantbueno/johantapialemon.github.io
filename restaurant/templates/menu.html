@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Menu</h1>
+  <section>
+
+  <article>
+    <h2>Grilled fish</h2>
+    <img src="{% static 'img/Grilled fish B.jpg' %}">
+    <p>
+    Our famous Greek salad of crispy lettuce, peppers, olives, and our
+Chicago-style feta cheese. Garnished with crispy onion and salty capers.
+    </p>
+  </article>  
+  <article>
+    <h2>Lemon dessert</h2>
+    <img src="{% static 'img/lemon dessert.jpg' %}">
+    <p>
+      This cake is adored not only for its flavor but also for its texture and simplicity. A base of creamed butter and sugar, eggs, lemon, milk, and flour are among the most basic ingredients. We omitted the brown sugar and substituted extra granulated sugar instead.
+    </p>
+  </article>
+  <article>
+    <h2>Greek Salad</h2>
+    <img src="{% static 'img/greek salad.jpg' %}">
+    <p>
+      Our famous Greek salad of crispy lettuce, peppers, olives, and our
+      Chicago-style feta cheese. Garnished with crispy onion and salty capers.
+          </p>
+  </article>
+</section>
+{% endblock %}
